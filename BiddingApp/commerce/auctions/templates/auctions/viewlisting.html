@@ -1,0 +1,63 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    
+     {% if message %}
+         <div class="alert alert-{{msg_type}}">{{ message }}</div>
+     {% endif %}
+    <br>
+    <br>
+     <div>
+         <h1>{{ item.title }}</h1>
+         <br>
+         {% if added %}
+            <a href="{% url 'addtowatchlist' item.id %}" class="btn btn-danger btn-lg" name="remove">Remove from Watchlist</a>
+         {% else %} 
+            <a href="{% url 'addtowatchlist' item.id %}" class="btn btn-success btn-lg" name="addto">Add to Watchlist</a>
+         {% endif %}
+         <br>
+         <img src="{{item.image}}" alt="indeximage" style="height: 350px;">
+         <p>Description:{{ item.description }}</p>
+         <p>Category:{{item.catagory}}</p>
+         <p>Current bid:{{item.starting_bid}},by:-</p>
+         <p>Seller:{{item.seller}}</p>
+         <p>Created on:{{item.createdat}}</p>
+         <br> 
+        <br>
+        {% if user.username != item.seller %}
+            <p>Place your bid:</p>
+            <form action="{% url 'viewlisting' item.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" type="text" name="newbid" placeholder="Your Bid">
+                </div>
+                <p><input class="btn btn-primary" type="submit" value="Submit"></p>
+            </form>
+        {% endif %}
+        <br><br>
+        {% if user.username == item.seller %}
+            <a href="{% url 'closebid' item.id %}" class="btn btn-danger btn-lg" name="close">Close bid</a>
+        {% endif %}
+            <br><br>
+        <h3>Comments</h3>
+        <br>
+        {% for comment in comments %}
+            <div>
+                <h5>by:-{{comment.user}}</h5>
+                <br>
+                <h6>{{comment.content}}</h6>
+                <h6>{{comment.createdon}}</h6>
+            </div>
+            <br>
+        {% endfor %}
+        <p>Add your comment here:</p>
+            <form action="{% url 'addcomment' item.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" type="text" name="newcomment" placeholder="+ add your comment">
+                </div>
+                <p><input class="btn btn-primary" type="submit" value="Add comment"></p>
+            </form>
+     </div>
+
+{% endblock %}

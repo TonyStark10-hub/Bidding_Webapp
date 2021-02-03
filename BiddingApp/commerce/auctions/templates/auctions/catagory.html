@@ -1,0 +1,37 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+    {% if not items %}
+        <h3>No items at this moment in this category</h3>
+    {% endif %}
+    <div>
+        <ul>
+            {% for item in items %}
+                 <div>
+                    <li>
+                        <div>
+                            <h2>{{ item.title }}</h2>
+                        </div>
+                        <div>
+                            <img class="card-img" src="{{ item.image_link }}"  style="height: 200px;">
+                        </div>
+                        <div>
+                            <h4>{{ item.description }}</h4>
+                        </div>
+                        <div>
+                            <h5>Seller:{{ item.seller}}</h5>
+                            <h5>Starting bid:{{ item.starting_bid}}</h5>
+                            <h5>Created on:{{ item.createdat }}</h5>    
+                        </div>
+                        {% if user.is_authenticated %}
+                        <div>
+                            <a href="{% url 'viewlisting' item.id %}" class="btn btn-primary">View</a>
+                        </div>
+                        {% endif %}
+                        
+                    </li>
+                </div>
+            {% endfor %}
+        </ul>
+
+    </div>
+{% endblock %}

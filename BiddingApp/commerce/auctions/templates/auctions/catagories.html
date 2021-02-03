@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+    
+<div class="col-xl-7 pb-2">
+    <ul class="list-group">
+        <a href="{% url 'catagory' 'Fashion' %}"><li class="list-group-item"><i class="fas fa-tshirt mr-5"></i> Fashion</li></a>
+        <a href="{% url 'catagory' 'Tools' %}"><li class="list-group-item"><i class="fas fa-gavel mr-5"></i> Tools</li></a>
+        <a href="{% url 'catagory' 'Toys' %}"><li class="list-group-item"><i class="fas fa-dice mr-5"></i> Toys</li></a>
+        <a href="{% url 'catagory' 'Electronics' %}"><li class="list-group-item"><i class="fas fa-laptop mr-5"></i> Electronics</li></a>
+        <a href="{% url 'catagory' 'Accessories' %}"><li class="list-group-item"><i class="fas fa-headset mr-5"></i> Accessories</li></a>
+        <a href="{% url 'catagory' 'Books' %}"><li class="list-group-item"><i class="fas fa-book-open mr-5"></i> Books</li></a>
+        <a href="{% url 'catagory' 'Miscellaneous' %}"><li class="list-group-item"><i class="fas fa-book-open mr-5"></i> Books</li></a>
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+    {% if not list %}
+        <h3>No items  at this moment</h3>
+    {% endif %}
+    <div>
+        <ol>
+            {% for item in list %}
+                 <div>
+                    <li>
+                        <div>
+                            <h2>Congratulations you have won the bid for :{{ item.title }}</h2>
+                        </div>
+                        <div>
+                            <h5>sold by:{{ item.seller}}</h5>
+                            <h5>Final bid price:{{ item.final_price}}</h5>    
+                        </div>
+                        
+                    </li>
+                </div>
+                <br><br>
+            {% endfor %}
+        </ol>
+
+    </div>
+{% endblock %}
